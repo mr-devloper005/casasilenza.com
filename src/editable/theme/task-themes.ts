@@ -52,14 +52,31 @@ const base = {
   radius: '0.75rem',
 } satisfies Omit<TaskTheme, 'kicker' | 'note'>
 
+const homeDark = {
+  dark: true,
+  fontDisplay: "'Manrope', system-ui, sans-serif",
+  fontBody: "'Manrope', system-ui, sans-serif",
+  bg: '#05051f',
+  surface: '#0b0a2d',
+  raised: '#11103b',
+  text: '#f8f7ff',
+  muted: '#b8b3d4',
+  line: '#302a66',
+  accent: '#8b5cf6',
+  accentSoft: '#20175c',
+  onAccent: '#ffffff',
+  glow: 'rgba(91,33,244,0.28)',
+  radius: '1.25rem',
+} satisfies Omit<TaskTheme, 'kicker' | 'note'>
+
 export const taskThemes: Record<TaskKey, TaskTheme> = {
   article: { ...base, kicker: 'Articles', note: 'In-depth reads, guides and stories worth your time.' },
   listing: { ...base, kicker: 'Businesses', note: 'Find, compare and connect with local businesses.' },
-  classified: { ...base, kicker: 'Marketplace', note: 'Fresh offers and listings, ready to act on.' },
+  classified: { ...homeDark, kicker: 'Classified', note: 'Fresh local offers, services and opportunities ready to explore.' },
   image: { ...base, kicker: 'Photos', note: 'A visual feed of standout images and galleries.' },
   sbm: { ...base, kicker: 'Bookmarks', note: 'Curated resources and links worth saving.' },
   pdf: { ...base, kicker: 'Documents', note: 'Downloadable guides, reports and references.' },
-  profile: { ...base, kicker: 'People', note: 'Discover creators, businesses and profiles.' },
+  profile: { ...homeDark, kicker: 'Profiles', note: 'Discover people and profiles from the CasaSilenza community.' },
 }
 
 export function getTaskTheme(task: TaskKey): TaskTheme {

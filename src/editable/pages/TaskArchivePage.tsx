@@ -281,11 +281,16 @@ function ListingArchiveCard({ post, href }: { post: SitePost; href: string }) {
 }
 
 function ClassifiedArchiveCard({ post, href }: { post: SitePost; href: string }) {
+  const image = getImage(post)
   const price = getField(post, ['price', 'amount', 'budget'])
   const location = getField(post, ['location', 'address', 'city'])
   const condition = getField(post, ['condition', 'type', 'availability'])
   return (
-    <Link href={href} className={`${cardBase} flex flex-col p-6 sm:p-7`}>
+    <Link href={href} className={`${cardBase} flex flex-col overflow-hidden`}>
+      <div className="aspect-[16/10] overflow-hidden bg-[var(--tk-raised)]">
+        <img src={image} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+      </div>
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
         <span className="editable-display text-3xl font-semibold tracking-[-0.03em] text-[var(--tk-accent)]">{price || 'Open offer'}</span>
         {condition ? <span className="rounded-full bg-[var(--tk-accent-soft)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--tk-accent)]">{condition}</span> : null}
@@ -296,6 +301,7 @@ function ClassifiedArchiveCard({ post, href }: { post: SitePost; href: string })
       <div className="mt-6 flex items-center justify-between border-t border-[var(--tk-line)] pt-4 text-xs font-medium text-[var(--tk-muted)]">
         <span className="inline-flex items-center gap-1.5">{location ? <><MapPin className="h-3.5 w-3.5" /> {location}</> : 'Details inside'}</span>
         <ArrowUpRight className="h-4 w-4 text-[var(--tk-accent)] transition group-hover:translate-x-0.5" />
+      </div>
       </div>
     </Link>
   )
@@ -354,11 +360,12 @@ function ProfileArchiveCard({ post, href }: { post: SitePost; href: string }) {
   const avatar = getImages(post)[0]
   const role = getField(post, ['role', 'designation', 'company', 'location'])
   return (
-    <Link href={href} className={`${cardBase} flex flex-col items-center p-7 text-center`}>
-      <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-[var(--tk-line)] bg-[var(--tk-raised)]">
+    <Link href={href} className={`${cardBase} relative flex flex-col items-center overflow-hidden p-7 text-center`}>
+      <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(120deg,#17104d,#5b21f4)]" />
+      <div className="relative mt-6 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-[var(--tk-surface)] bg-[var(--tk-raised)] shadow-[0_18px_45px_rgba(91,33,244,.3)]">
         {avatar ? <img src={avatar} alt="" className="h-full w-full object-cover" /> : <UserRound className="h-10 w-10 text-[var(--tk-muted)]" />}
       </div>
-      <h2 className="editable-display mt-5 text-lg font-semibold tracking-[-0.02em]">{post.title}</h2>
+      <h2 className="editable-display mt-5 text-xl font-bold tracking-[-0.03em]">{post.title}</h2>
       {role ? <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.16em] text-[var(--tk-accent)]">{role}</p> : null}
       <RatingLine post={post} center />
       <p className="mt-3 line-clamp-2 text-sm leading-6 text-[var(--tk-muted)]">{getSummary(post)}</p>
