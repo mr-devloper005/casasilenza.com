@@ -71,7 +71,7 @@ function pageHref(basePath: string, category: string, page: number) {
 
 const taskGrid: Record<TaskKey, string> = {
   article: 'grid gap-7 md:grid-cols-2 xl:grid-cols-3',
-  listing: 'grid gap-5 xl:grid-cols-2',
+  listing: 'grid gap-7 md:grid-cols-2 xl:grid-cols-3',
   classified: 'grid gap-5 sm:grid-cols-2 xl:grid-cols-3',
   image: 'columns-1 gap-5 [column-fill:_balance] sm:columns-2 xl:columns-3',
   sbm: 'grid gap-5 md:grid-cols-2 xl:grid-cols-3',
@@ -256,26 +256,27 @@ function ArticleArchiveCard({ post, href, index }: { post: SitePost; href: strin
 }
 
 function ListingArchiveCard({ post, href }: { post: SitePost; href: string }) {
-  const logo = getImages(post)[0]
+  const logo = getImage(post)
   const location = getField(post, ['location', 'address', 'city'])
   const phone = getField(post, ['phone', 'telephone', 'mobile'])
   const website = getField(post, ['website', 'url'])
   return (
-    <Link href={href} className={`${cardBase} flex items-center gap-5 p-5 sm:p-6`}>
-      <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] border border-[var(--tk-line)] bg-[var(--tk-raised)]">
-        {logo ? <img src={logo} alt="" className="h-full w-full object-cover" /> : <BriefcaseBusiness className="h-9 w-9 text-[var(--tk-muted)]" />}
+    <Link href={href} className={`${cardBase} flex flex-col overflow-hidden`}>
+      <div className="aspect-[16/10] overflow-hidden bg-[var(--tk-raised)]">
+        {logo ? <img src={logo} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-110" /> : <div className="grid h-full place-items-center"><BriefcaseBusiness className="h-10 w-10 text-[var(--tk-muted)]" /></div>}
       </div>
-      <div className="min-w-0 flex-1">
-        <h2 className="editable-display truncate text-xl font-semibold tracking-[-0.02em]">{post.title}</h2>
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--tk-accent)]">{getCategory(post, 'Business listing')}</p>
+        <h2 className="editable-display mt-3 line-clamp-2 text-2xl font-semibold leading-snug tracking-[-0.02em]">{post.title}</h2>
         <RatingLine post={post} />
-        <p className="mt-2 line-clamp-1 text-sm leading-6 text-[var(--tk-muted)]">{getSummary(post)}</p>
+        <p className="mt-3 line-clamp-2 flex-1 text-sm leading-7 text-[var(--tk-muted)]">{getSummary(post)}</p>
         <div className="mt-3 flex flex-wrap gap-3 text-xs font-medium text-[var(--tk-muted)]">
           {location ? <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> {location}</span> : null}
           {phone ? <span className="inline-flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> {phone}</span> : null}
           {website ? <span className="inline-flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> Website</span> : null}
         </div>
+        <CardArrow label="View business" />
       </div>
-      <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--tk-muted)] transition group-hover:text-[var(--tk-accent)]" />
     </Link>
   )
 }
