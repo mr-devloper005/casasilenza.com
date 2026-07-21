@@ -194,16 +194,16 @@ function ArticleDetail({ post, related, comments }: { post: SitePost; related: S
   const images = getImages(post)
   return (
     <>
-      <article className="mx-auto max-w-4xl px-6 py-14 sm:py-20">
+      <article className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
         <BackLink task="article" />
         <p className="mt-10 text-xs font-medium uppercase tracking-[0.28em] text-[var(--tk-accent)]">{categoryOf(post, 'Article')}</p>
         <h1 className="editable-display mt-5 text-balance text-4xl font-semibold leading-[1.06] tracking-[-0.03em] sm:text-5xl lg:text-[3.4rem]">{post.title}</h1>
         <div className="mt-6 text-sm text-[var(--tk-muted)]">
           <span>{SITE_CONFIG.name}</span>
         </div>
-        {images[0] ? <img src={images[0]} alt="" className="mt-10 aspect-[16/9] w-full rounded-[var(--tk-radius)] border border-[var(--tk-line)] object-cover" /> : null}
-        <BodyContent post={post} />
-        <EditableArticleComments slug={post.slug} comments={comments} />
+        {images[0] ? <img src={images[0]} alt="" className="mt-10 aspect-[16/9] w-full rounded-[var(--tk-radius)] border border-violet-400/30 object-cover shadow-[0_28px_80px_rgba(91,33,244,.2)]" /> : null}
+        <div className="mt-8 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6 sm:p-10"><BodyContent post={post} /></div>
+        <div className="mt-8 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6 sm:p-8"><EditableArticleComments slug={post.slug} comments={comments} /></div>
       </article>
       <RelatedStrip task="article" related={related} />
     </>
@@ -220,10 +220,10 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
   const website = getField(post, ['website', 'url'])
   const mapSrc = mapSrcFor(post)
   return (
-    <section className="mx-auto max-w-[var(--editable-container)] px-6 py-14 sm:py-20 lg:px-8">
+    <section className="mx-auto max-w-5xl px-6 py-14 sm:py-20 lg:px-8">
       <BackLink task="listing" />
-      <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <article className="min-w-0">
+      <div className="mt-8 grid gap-8">
+        <article className="min-w-0 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6 shadow-[0_28px_80px_rgba(91,33,244,.16)] sm:p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
             <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-raised)]">
               {logo ? <img src={logo} alt="" className="h-full w-full object-cover" /> : <Building2 className="h-12 w-12 text-[var(--tk-muted)]" />}
@@ -235,12 +235,13 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
             </div>
           </div>
           {leadText(post) ? <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--tk-muted)]">{leadText(post)}</p> : null}
+          {logo ? <img src={logo} alt="" className="mt-9 aspect-[16/9] w-full rounded-[var(--tk-radius)] border border-violet-400/30 object-cover shadow-[0_28px_80px_rgba(91,33,244,.2)]" /> : null}
           <InfoGrid items={[['Location', address, MapPin], ['Phone', phone, Phone], ['Email', email, Mail], ['Website', website, Globe2]]} />
           <Divider />
           <BodyContent post={post} />
           <ImageStrip images={images.slice(1)} label="Showcase" />
         </article>
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        <aside className="grid gap-6 md:grid-cols-2">
           {mapSrc ? <MapBox src={mapSrc} label={address || post.title} /> : null}
           <RelatedPanel task="listing" post={post} related={related} />
         </aside>
