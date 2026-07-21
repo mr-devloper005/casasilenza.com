@@ -242,7 +242,6 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
         </article>
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           {mapSrc ? <MapBox src={mapSrc} label={address || post.title} /> : null}
-          <ContactAction website={website} phone={phone} email={email} />
           <RelatedPanel task="listing" post={post} related={related} />
         </aside>
       </div>
@@ -258,13 +257,12 @@ function ClassifiedDetail({ post, related }: { post: SitePost; related: SitePost
   const condition = getField(post, ['condition', 'availability', 'type'])
   const phone = getField(post, ['phone', 'telephone', 'mobile'])
   const email = getField(post, ['email'])
-  const website = getField(post, ['website', 'url'])
   return (
     <>
-      <section className="mx-auto grid max-w-[var(--editable-container)] gap-10 px-6 py-14 sm:py-20 lg:grid-cols-[360px_minmax(0,1fr)] lg:px-8">
+      <section className="relative mx-auto grid max-w-[var(--editable-container)] gap-10 overflow-hidden px-6 py-14 sm:py-20 lg:grid-cols-[380px_minmax(0,1fr)] lg:px-8">
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <BackLink task="classified" />
-          <div className="mt-7 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-7 shadow-[0_22px_60px_rgba(15,23,42,0.08)]">
+          <div className="mt-7 rounded-[var(--tk-radius)] border border-violet-400/30 bg-[var(--tk-surface)] p-7 shadow-[0_28px_80px_rgba(91,33,244,0.2)]">
             <Kicker task="classified">Classified</Kicker>
             <h1 className="editable-display mt-4 text-2xl font-semibold leading-tight tracking-[-0.02em]">{post.title}</h1>
             <DetailMeta post={post} category={getField(post, ['category'])} />
@@ -279,10 +277,9 @@ function ClassifiedDetail({ post, related }: { post: SitePost; related: SitePost
             </div>
           </div>
         </aside>
-        <article className="min-w-0">
+        <article className="min-w-0 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6 sm:p-8">
           <ImageStrip images={images} label="Offer images" large />
           <BodyContent post={post} />
-          <ContactAction website={website} phone={phone} email={email} />
         </article>
       </section>
       <RelatedStrip task="classified" related={related} />
@@ -395,8 +392,9 @@ function ProfileDetail({ post, related }: { post: SitePost; related: SitePost[] 
         <BackLink task="profile" />
         <div className="mt-8 grid gap-10 lg:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-8 text-center shadow-[0_22px_60px_rgba(15,23,42,0.08)]">
-              <div className="mx-auto flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border border-[var(--tk-line)] bg-[var(--tk-raised)]">
+            <div className="relative overflow-hidden rounded-[var(--tk-radius)] border border-violet-400/30 bg-[var(--tk-surface)] p-8 text-center shadow-[0_28px_80px_rgba(91,33,244,0.2)]">
+              <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(120deg,#17104d,#5b21f4)]" />
+              <div className="relative mx-auto mt-8 flex h-36 w-36 items-center justify-center overflow-hidden rounded-full border-4 border-[var(--tk-surface)] bg-[var(--tk-raised)] shadow-[0_18px_45px_rgba(91,33,244,.3)]">
                 {images[0] ? <img src={images[0]} alt="" className="h-full w-full object-cover" /> : <UserRound className="h-14 w-14 text-[var(--tk-muted)]" />}
               </div>
               <h1 className="editable-display mt-6 text-2xl font-semibold tracking-[-0.02em]">{post.title}</h1>
@@ -405,7 +403,7 @@ function ProfileDetail({ post, related }: { post: SitePost; related: SitePost[] 
               <ContactAction website={website} email={email} bare />
             </div>
           </aside>
-          <article className="min-w-0">
+          <article className="min-w-0 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6 sm:p-8">
             <Kicker task="profile">Profile</Kicker>
             <BodyContent post={post} />
             <ImageStrip images={images.slice(1)} label="Gallery" />
@@ -567,4 +565,3 @@ function RelatedCard({ task, post, grid = false }: { task: TaskKey; post: SitePo
     </Link>
   )
 }
-

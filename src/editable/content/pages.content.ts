@@ -3,11 +3,11 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const pagesContent = {
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
-      description: 'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
-      openGraphDescription: 'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+      title: 'Local classified listings and opportunities',
+      description: 'Browse current classified listings for services, opportunities, property, items, and local offers.',
+      openGraphTitle: 'Local classified listings and opportunities',
+      openGraphDescription: 'Find and publish useful classified listings through CasaSilenza.',
+      keywords: ['classified listings', 'local offers', 'services', 'opportunities'],
     },
     hero: {
       badge: 'Latest stories and visuals',
