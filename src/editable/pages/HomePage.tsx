@@ -29,8 +29,8 @@ function uniquePosts(posts: SitePost[]) {
 }
 
 export default async function HomePage() {
-  const primaryTask = 'listing' as TaskKey
-  const primaryRoute = '/listing'
+  const primaryTask = 'classified' as TaskKey
+  const primaryRoute = '/classified'
   const taskFeed: TaskFeedItem[] = await fetchHomeTaskFeed(12, { timeoutMs: 2500 })
   const primaryPosts = uniquePosts(taskFeed.find(({ task }) => task.key === primaryTask)?.posts || []).slice(0, 24)
   const timeSections: HomeTimeSection[] = await fetchHomeTimeSections(primaryTask, { limit: 8, timeoutMs: 2500 })

@@ -70,8 +70,8 @@ const homeDark = {
 } satisfies Omit<TaskTheme, 'kicker' | 'note'>
 
 export const taskThemes: Record<TaskKey, TaskTheme> = {
-  article: { ...homeDark, kicker: 'Articles', note: 'In-depth reads, practical guides and stories worth your time.' },
-  listing: { ...homeDark, kicker: 'Business listings', note: 'Find, compare and connect with useful businesses and services.' },
+  article: { ...base, kicker: 'Articles', note: 'In-depth reads, guides and stories worth your time.' },
+  listing: { ...base, kicker: 'Businesses', note: 'Find, compare and connect with local businesses.' },
   classified: { ...homeDark, kicker: 'Classified', note: 'Fresh local offers, services and opportunities ready to explore.' },
   image: { ...base, kicker: 'Photos', note: 'A visual feed of standout images and galleries.' },
   sbm: { ...base, kicker: 'Bookmarks', note: 'Curated resources and links worth saving.' },

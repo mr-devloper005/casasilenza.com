@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Search, X, Plus, LogOut } from 'lucide-react'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
-const links = [['Home','/'],['Listings','/listing'],['About','/about'],['Search','/search']] as const
+const links = [['Home','/'],['Classified','/classified'],['About','/about'],['Search','/search']] as const
 export function EditableNavbar() {
   const [open,setOpen]=useState(false); const pathname=usePathname(); const {session,logout}=useEditableLocalAuthSession()
   return <header className="sticky top-0 z-50 border-b border-[var(--editable-border)] bg-[var(--editable-nav-bg)]/95 backdrop-blur-xl"><nav className="mx-auto flex min-h-20 max-w-[var(--editable-container)] items-center gap-8 px-5 lg:px-8">
